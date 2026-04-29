@@ -1,0 +1,8 @@
+src/
+example/
+.github/
+node_modules/
+*.config.ts
+tsconfig.json
+.omc/
+.gitignore

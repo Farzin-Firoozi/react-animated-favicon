@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useAnimatedFavicon } from "react-animated-favicon";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -13,8 +13,8 @@ const PRESETS = [
     url: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2tqdGJoOHZhazVhZHg0amwyazU1OHR5eXdtcXA1Nnk0b3JnZGp6ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dxn6fRlTIShoeBr69N/giphy.gif",
   },
   {
-    label: "Like",
-    url: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnI1bWZrYnBxN2kxM3pkamxtb2NoMmxqb2thbTZsOG44aHd4NjRmNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Yqiw4XZ1LhMRRCL2ZO/giphy.gif",
+    label: "Dancing Cat",
+    url: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTJueGsxeXp3ZGN1YTd2eXVsMzBnczNvZWlsM3ByNmRsZms0MnJpcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gXXFrjHFJIMoqKr8UT/giphy.gif",
   },
 ];
 
@@ -49,6 +49,44 @@ function MyComponent() {
   );
 }`;
 
+const API_ROWS = [
+  {
+    api: "useAnimatedFavicon(url, options)",
+    details:
+      "Core hook that loads, decodes, and animates GIF frames as favicon.",
+  },
+  {
+    api: "play() / pause() / stop()",
+    details: "Playback controls. stop() resets frame index to 0.",
+  },
+  {
+    api: "goToFrame(index)",
+    details: "Seeks to a specific frame index for scrubbing and previews.",
+  },
+  {
+    api: "isLoading / isPlaying / error",
+    details: "State flags for loading, active playback, and error handling UI.",
+  },
+  {
+    api: "fps / maxFps / maxFrames",
+    details:
+      "Performance controls for speed caps and memory-friendly truncation.",
+  },
+  {
+    api: "fallbackUrl",
+    details: "Static icon used when GIF fails or browser support is limited.",
+  },
+  {
+    api: "onLoad / onWarning / onError / onFrameChange",
+    details: "Lifecycle callbacks for telemetry, UX messages, and sync logic.",
+  },
+  {
+    api: "Local GIF files",
+    details:
+      "Supported via file input + blob URL (object URL), not raw file:// paths.",
+  },
+];
+
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
@@ -69,6 +107,7 @@ export default function App() {
   const [activeUrl, setActiveUrl] = useState(PRESETS[0].url);
   const [fps, setFps] = useState<number | undefined>(15);
   const [warning, setWarning] = useState<string | null>(null);
+  const localObjectUrlRef = useRef<string | null>(null);
 
   const {
     currentFrame,
@@ -102,6 +141,30 @@ export default function App() {
     setInputUrl(url);
     setActiveUrl(url);
   };
+
+  const handleLocalFile = (file: File | null) => {
+    if (!file) return;
+    if (file.type !== "image/gif") {
+      setWarning("Please select a valid .gif file");
+      return;
+    }
+    if (localObjectUrlRef.current) {
+      URL.revokeObjectURL(localObjectUrlRef.current);
+    }
+    const objectUrl = URL.createObjectURL(file);
+    localObjectUrlRef.current = objectUrl;
+    setWarning(null);
+    setInputUrl(objectUrl);
+    setActiveUrl(objectUrl);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (localObjectUrlRef.current) {
+        URL.revokeObjectURL(localObjectUrlRef.current);
+      }
+    };
+  }, []);
 
   const progress = frameCount > 0 ? (currentFrame / (frameCount - 1)) * 100 : 0;
 
@@ -159,6 +222,16 @@ export default function App() {
             <button className="btn btn-primary" onClick={handleGo}>
               Load
             </button>
+          </div>
+          <div className="local-file-row">
+            <label className="local-file-label">
+              Or load local GIF:
+              <input
+                type="file"
+                accept="image/gif"
+                onChange={(e) => handleLocalFile(e.target.files?.[0] ?? null)}
+              />
+            </label>
           </div>
 
           <div className="presets">
@@ -302,6 +375,26 @@ export default function App() {
               {CODE_SNIPPET}
             </SyntaxHighlighter>
           </div>
+        </section>
+
+        <section className="section compat-section">
+          <div className="section-label">API Details</div>
+          <table className="compat-table api-table">
+            <thead>
+              <tr>
+                <th>API</th>
+                <th>Functionality</th>
+              </tr>
+            </thead>
+            <tbody>
+              {API_ROWS.map((row) => (
+                <tr key={row.api}>
+                  <td className="api-name">{row.api}</td>
+                  <td>{row.details}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </section>
 
         <section className="section compat-section">

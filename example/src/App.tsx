@@ -192,7 +192,7 @@ export default function App() {
               npm
             </a>
             <a
-              href="https://github.com/farzinfiroozi/react-animated-favicon"
+              href="https://github.com/farzin-firoozi/react-animated-favicon"
               target="_blank"
               rel="noreferrer"
               className="badge"
@@ -446,11 +446,7 @@ export default function App() {
       <footer className="footer">
         <p>
           MIT License · Built by{" "}
-          <a
-            href="https://github.com/farzinfiroozi"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="https://farzin.io" target="_blank" rel="noreferrer">
             Farzin Firoozi
           </a>
         </p>

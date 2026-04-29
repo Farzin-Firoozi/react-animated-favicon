@@ -445,7 +445,14 @@ export default function App() {
 
       <footer className="footer">
         <p>
-          MIT License · Built by{" "}
+          <a
+            href="https://github.com/farzin-firoozi/react-animated-favicon/blob/main/LICENSE"
+            target="_blank"
+            rel="noreferrer"
+          >
+            MIT License
+          </a>{" "}
+          · Built by{" "}
           <a href="https://farzin.io" target="_blank" rel="noreferrer">
             Farzin Firoozi
           </a>

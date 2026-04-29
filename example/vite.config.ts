@@ -9,6 +9,6 @@ export default defineConfig({
       'react-animated-favicon': resolve(__dirname, '../src/index.ts'),
     },
   },
-  // Custom domain deployment (react-animated-favicon.github.io) is served from root.
-  base: '/',
+  // GitHub project page deployment path.
+  base: '/react-animated-favicon/',
 });

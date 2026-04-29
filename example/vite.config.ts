@@ -9,7 +9,6 @@ export default defineConfig({
       'react-animated-favicon': resolve(__dirname, '../src/index.ts'),
     },
   },
-  // For GitHub Pages: set base to /react-animated-favicon/
-  // For Vercel or root hosting: set to '/'
-  base: '/react-animated-favicon/',
+  // Custom domain deployment (react-animated-favicon.github.io) is served from root.
+  base: '/',
 });

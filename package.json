@@ -17,6 +17,7 @@
     "dist"
   ],
   "sideEffects": false,
+  "homepage": "https://farzin-firoozi.github.io/react-animated-favicon",
   "scripts": {
     "build": "vite build && tsc --emitDeclarationOnly --declaration --outDir dist",
     "dev": "vite build --watch",

@@ -3,7 +3,7 @@ import type { GifFrame, UseAnimatedFaviconOptions, UseAnimatedFaviconResult, Par
 import { parseGifFrames } from '../lib/parser';
 import { createFaviconController, type FaviconController } from '../lib/favicon';
 import { createScheduler, type Scheduler } from '../lib/scheduler';
-import { isFirefox, isUnsupportedBrowser, isSafari, supportsWorker } from '../lib/detect';
+import { isUnsupportedBrowser, isSafari, supportsWorker } from '../lib/detect';
 
 function loadWithWorker(
   url: string,
@@ -152,20 +152,6 @@ export function useAnimatedFavicon(
       }
 
       try {
-        if (isFirefox()) {
-          // Firefox supports animated GIF favicons natively.
-          const ctrl = createFaviconController(32, 32);
-          faviconRef.current = ctrl;
-          ctrl.setFallback(url);
-          onLoadRef.current?.([]);
-          if (mountedRef.current) {
-            setFrames([]);
-            setCurrentFrame(0);
-            setIsPlaying(false);
-          }
-          return;
-        }
-
         let result: ParseResult;
 
         if (useWorker && supportsWorker()) {

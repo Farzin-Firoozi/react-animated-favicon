@@ -1,18 +1,20 @@
 import { useState, useCallback } from "react";
 import { useAnimatedFavicon } from "react-animated-favicon";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const PRESETS = [
   {
-    label: "Loading Spinner",
-    url: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif",
+    label: "Polish Cow",
+    url: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWM1YWJxOWwweXh5ank5dTdxZ2V1anVpanEydjUybHU2NWlpanB6ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q3J5xe18ZEOVZqWA8x/giphy.gif",
   },
   {
-    label: "Pacman",
-    url: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmwxcXRzaHA4ZGtzdnlmZjYzZnBnZDlyaWVybHV3ZTh6ZjV6cXkzNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fMW4CaO6zfiwLoIpEQ/giphy.gif",
+    label: "Github Tiles",
+    url: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2tqdGJoOHZhazVhZHg0amwyazU1OHR5eXdtcXA1Nnk0b3JnZGp6ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dxn6fRlTIShoeBr69N/giphy.gif",
   },
   {
-    label: "Nyan Cat",
-    url: "https://upload.wikimedia.org/wikipedia/commons/9/91/Nyan_cat_250px_frame.gif",
+    label: "Like",
+    url: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnI1bWZrYnBxN2kxM3pkamxtb2NoMmxqb2thbTZsOG44aHd4NjRmNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Yqiw4XZ1LhMRRCL2ZO/giphy.gif",
   },
 ];
 
@@ -65,7 +67,7 @@ function CopyButton({ text }: { text: string }) {
 export default function App() {
   const [inputUrl, setInputUrl] = useState(PRESETS[0].url);
   const [activeUrl, setActiveUrl] = useState(PRESETS[0].url);
-  const [fps, setFps] = useState<number | undefined>(undefined);
+  const [fps, setFps] = useState<number | undefined>(15);
   const [warning, setWarning] = useState<string | null>(null);
 
   const {
@@ -295,11 +297,10 @@ export default function App() {
 
         <section className="section code-section">
           <div className="section-label">Usage</div>
-          <div className="code-block multiline">
-            <pre>
-              <code>{CODE_SNIPPET}</code>
-            </pre>
-            <CopyButton text={CODE_SNIPPET} />
+          <div className="multiline">
+            <SyntaxHighlighter language="tsx" style={oneDark}>
+              {CODE_SNIPPET}
+            </SyntaxHighlighter>
           </div>
         </section>
 

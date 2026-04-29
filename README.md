@@ -13,7 +13,7 @@ npm install react-animated-favicon
 ## Quick Start
 
 ```tsx
-import { AnimatedFavicon } from 'react-animated-favicon';
+import { AnimatedFavicon } from "react-animated-favicon";
 
 export function App() {
   return (
@@ -28,7 +28,7 @@ export function App() {
 ## Hook Usage
 
 ```tsx
-import { useAnimatedFavicon } from 'react-animated-favicon';
+import { useAnimatedFavicon } from "react-animated-favicon";
 
 export function FaviconControls() {
   const {
@@ -41,10 +41,10 @@ export function FaviconControls() {
     pause,
     stop,
     goToFrame,
-  } = useAnimatedFavicon('https://example.com/loader.gif', {
+  } = useAnimatedFavicon("https://example.com/loader.gif", {
     autoPlay: true,
     maxFps: 15,
-    fallbackUrl: '/favicon.ico',
+    fallbackUrl: "/favicon.ico",
   });
 
   if (isLoading) return <p>Loading favicon...</p>;
@@ -74,13 +74,13 @@ export function FaviconControls() {
 import {
   GifFaviconProvider,
   useGifFaviconContext,
-} from 'react-animated-favicon';
+} from "react-animated-favicon";
 
 function Controls() {
   const { isPlaying, play, pause } = useGifFaviconContext();
   return (
     <button onClick={isPlaying ? pause : play}>
-      {isPlaying ? 'Pause' : 'Play'}
+      {isPlaying ? "Pause" : "Play"}
     </button>
   );
 }
@@ -89,7 +89,7 @@ export function App() {
   return (
     <GifFaviconProvider
       url="https://example.com/loader.gif"
-      options={{ fallbackUrl: '/favicon.ico', useWorker: true }}
+      options={{ fallbackUrl: "/favicon.ico", useWorker: true }}
     >
       <Controls />
     </GifFaviconProvider>
@@ -100,9 +100,9 @@ export function App() {
 ## Utilities (No React Dependency)
 
 ```ts
-import { preloadGif, frameToDataUrl } from 'react-animated-favicon';
+import { preloadGif, frameToDataUrl } from "react-animated-favicon";
 
-const frames = await preloadGif('https://example.com/loader.gif');
+const frames = await preloadGif("https://example.com/loader.gif");
 const firstFramePngDataUrl = frameToDataUrl(frames[0], 32);
 ```
 
@@ -113,12 +113,14 @@ Useful for preloading, transformations, or generating a visual fallback from fra
 ### `useAnimatedFavicon(url, options?)`
 
 Aliases are also exported:
+
 - `useGifFavicon`
 - `GifFavicon` (`AnimatedFavicon` alias)
 - `GifFaviconProvider` (`AnimatedFaviconProvider` alias)
 - `useGifFaviconContext`
 
 Returns:
+
 - `frames: GifFrame[]`
 - `currentFrame: number`
 - `frameCount: number`
@@ -133,21 +135,21 @@ Returns:
 
 ### Options
 
-| Option | Type | Default | Description |
-| --- | --- | --- | --- |
-| `autoPlay` | `boolean` | `true` | Start animating immediately after load. |
-| `fps` | `number` | `undefined` | Force fixed FPS, overriding GIF delay values. |
-| `maxFps` | `number` | `15` | Hard cap for playback speed. |
-| `maxFrames` | `number` | `60` | Truncate decoded frames beyond this count. |
-| `maxFileSize` | `number` | `5242880` | Warn (via `onWarning`) if GIF exceeds this size in bytes. |
-| `fallbackUrl` | `string` | `undefined` | Static favicon URL used on failures or unsupported environments. |
-| `pauseOnHidden` | `boolean` | `true` | Pause animation while tab is hidden. |
-| `restoreOnUnmount` | `boolean` | `true` | Restore original favicon when unmounted/destroyed. |
-| `useWorker` | `boolean` | `false` | Offload fetch/parse to a Web Worker when available. |
-| `onLoad` | `(frames) => void` | — | Called after frames are decoded. |
-| `onError` | `(err) => void` | — | Called on network/parse/runtime failures. |
-| `onWarning` | `(msg) => void` | — | Called for non-fatal issues (size/browser fallback). |
-| `onFrameChange` | `(index) => void` | — | Called on each frame tick. |
+| Option             | Type               | Default     | Description                                                      |
+| ------------------ | ------------------ | ----------- | ---------------------------------------------------------------- |
+| `autoPlay`         | `boolean`          | `true`      | Start animating immediately after load.                          |
+| `fps`              | `number`           | `undefined` | Force fixed FPS, overriding GIF delay values.                    |
+| `maxFps`           | `number`           | `15`        | Hard cap for playback speed.                                     |
+| `maxFrames`        | `number`           | `60`        | Truncate decoded frames beyond this count.                       |
+| `maxFileSize`      | `number`           | `5242880`   | Warn (via `onWarning`) if GIF exceeds this size in bytes.        |
+| `fallbackUrl`      | `string`           | `undefined` | Static favicon URL used on failures or unsupported environments. |
+| `pauseOnHidden`    | `boolean`          | `true`      | Pause animation while tab is hidden.                             |
+| `restoreOnUnmount` | `boolean`          | `true`      | Restore original favicon when unmounted/destroyed.               |
+| `useWorker`        | `boolean`          | `false`     | Offload fetch/parse to a Web Worker when available.              |
+| `onLoad`           | `(frames) => void` | —           | Called after frames are decoded.                                 |
+| `onError`          | `(err) => void`    | —           | Called on network/parse/runtime failures.                        |
+| `onWarning`        | `(msg) => void`    | —           | Called for non-fatal issues (size/browser fallback).             |
+| `onFrameChange`    | `(index) => void`  | —           | Called on each frame tick.                                       |
 
 ### `GifFrame`
 
@@ -178,9 +180,9 @@ The library is SSR-safe: all DOM work runs in `useEffect`.
 For Next.js App Router, use the component inside a client boundary:
 
 ```tsx
-'use client';
+"use client";
 
-import { AnimatedFavicon } from 'react-animated-favicon';
+import { AnimatedFavicon } from "react-animated-favicon";
 
 export default function ClientFavicon() {
   return (
@@ -202,16 +204,16 @@ Example Cloudflare Worker proxy:
 export default {
   async fetch(request) {
     const url = new URL(request.url);
-    const target = url.searchParams.get('url');
-    if (!target) return new Response('Missing ?url=', { status: 400 });
+    const target = url.searchParams.get("url");
+    if (!target) return new Response("Missing ?url=", { status: 400 });
 
     const res = await fetch(target, {
-      headers: { 'User-Agent': 'react-animated-favicon-proxy' },
+      headers: { "User-Agent": "react-animated-favicon-proxy" },
     });
 
     const headers = new Headers(res.headers);
-    headers.set('Access-Control-Allow-Origin', '*');
-    headers.set('Cache-Control', 'public, max-age=3600');
+    headers.set("Access-Control-Allow-Origin", "*");
+    headers.set("Cache-Control", "public, max-age=3600");
 
     return new Response(res.body, {
       status: res.status,
@@ -226,15 +228,15 @@ Then pass the proxied URL to the library.
 
 ## Browser Support
 
-| Browser | Support | Notes |
-| --- | --- | --- |
-| Chrome 90+ | Full | Reliable up to ~15 FPS. |
-| Firefox 88+ | Full | Reliable up to ~10 FPS. |
-| Edge 90+ | Full | Chromium behavior. |
-| Safari 15+ | Partial | Rapid updates may be ignored. |
-| Safari < 15 | No | Falls back to `fallbackUrl`. |
+| Browser       | Support     | Notes                                     |
+| ------------- | ----------- | ----------------------------------------- |
+| Chrome 90+    | Full        | Reliable up to ~15 FPS.                   |
+| Firefox 88+   | Full        | Reliable up to ~10 FPS.                   |
+| Edge 90+      | Full        | Chromium behavior.                        |
+| Safari 15+    | Partial     | Rapid updates may be ignored.             |
+| Safari < 15   | No          | Falls back to `fallbackUrl`.              |
 | Mobile Chrome | Best effort | Favicon visibility depends on UI surface. |
-| Mobile Safari | No | Falls back to `fallbackUrl`. |
+| Mobile Safari | No          | Falls back to `fallbackUrl`.              |
 
 ## Performance and Memory
 
@@ -247,6 +249,7 @@ Then pass the proxied URL to the library.
 
 Type declarations are published with the package.  
 Common exports:
+
 - `UseAnimatedFaviconOptions`
 - `UseAnimatedFaviconResult`
 - `GifFrame`
@@ -262,7 +265,3 @@ npm run build
 ```
 
 Project includes an `example` app for local verification.
-
-## License
-
-MIT

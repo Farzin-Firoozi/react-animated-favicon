@@ -22,7 +22,7 @@
     "dev": "vite build --watch",
     "dev:example": "pnpm --filter react-animated-favicon-demo dev",
     "build:example": "pnpm --filter react-animated-favicon-demo build",
-    "deploy:example": "pnpm --filter react-animated-favicon-demo deploy",
+    "deploy:example": "pnpm --filter react-animated-favicon-demo run deploy",
     "test": "vitest",
     "lint": "eslint src --ext .ts,.tsx",
     "prepublishOnly": "pnpm run build"

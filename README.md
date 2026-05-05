@@ -1,5 +1,13 @@
 # react-animated-favicon
 
+[![npm version](https://img.shields.io/npm/v/react-animated-favicon?style=flat)](https://www.npmjs.com/package/react-animated-favicon)
+[![npm downloads](https://img.shields.io/npm/dm/react-animated-favicon?style=flat)](https://www.npmjs.com/package/react-animated-favicon)
+[![npm license](https://img.shields.io/npm/l/react-animated-favicon?style=flat)](https://www.npmjs.com/package/react-animated-favicon)
+[![npm peer dependency React](https://img.shields.io/npm/dependency-version/react-animated-favicon/peer/react?label=peer%3A%20react&style=flat)](https://www.npmjs.com/package/react-animated-favicon)
+[![npm type definitions](https://img.shields.io/npm/types/react-animated-favicon?style=flat)](https://www.npmjs.com/package/react-animated-favicon)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/react-animated-favicon?style=flat)](https://bundlephobia.com/package/react-animated-favicon)
+[![GitHub stars](https://img.shields.io/github/stars/farzin-firoozi/react-animated-favicon?style=flat)](https://github.com/farzin-firoozi/react-animated-favicon)
+
 Zero-dependency React library for animated GIF favicons, fully client-side.
 
 `react-animated-favicon` decodes GIF frames in the browser, renders them on a hidden canvas, and swaps `<link rel="icon">` with `data:` URLs on each tick. No server rendering required.

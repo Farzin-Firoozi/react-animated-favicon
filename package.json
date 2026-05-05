@@ -1,6 +1,6 @@
 {
   "name": "react-animated-favicon",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "packageManager": "pnpm@10.33.2",
   "description": "Zero-dependency React library for animated GIF favicons, entirely client-side",
   "main": "./dist/react-animated-favicon.cjs.js",

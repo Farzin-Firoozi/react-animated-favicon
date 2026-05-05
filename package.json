@@ -41,7 +41,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/farzin-firoozi/react-animated-favicon"
+    "url": "git+https://github.com/farzin-firoozi/react-animated-favicon.git"
   },
   "peerDependencies": {
     "react": ">=16.8.0"
